@@ -145,6 +145,7 @@ public class Model {
 								neighborsOpinion[2] = m.agentsField[i][j].getOpinion();	//если ничья, то остаемся при своем мнении
 							}
 							break;
+							
 						case 2: //"random"
 							int i_random = (int) (Math.random() * (m.agentsField.length));	//случайные координаты (переделать на случайного соседа)
 							int j_random = (int) (Math.random() * (m.agentsField[0].length));	//случайные координаты

@@ -19,6 +19,6 @@ public WheelNonConformistAgent(int opinion, boolean zealot) { //заданные парамет
 	}
 
 public void changeOpinion(int newOpinion) {
-	this.setOpinion(newOpinion);
+	this.setOpinion(Math.abs(newOpinion - 1));
 	}
 }

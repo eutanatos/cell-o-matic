@@ -17,6 +17,6 @@ public RandomNonConformistAgent(int opinion, boolean zealot) { //заданные параме
 	}
 
 public void changeOpinion(int newOpinion) {
-	this.setOpinion(newOpinion);
+	this.setOpinion(Math.abs(newOpinion - 1));
 	}
 }

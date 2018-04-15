@@ -1,5 +1,7 @@
 package ru.nsc.bionet.cellomatic2;
 
+import ru.nsc.bionet.cellomatic2.agents.*;
+
 public class Model {
 	private int length; 									//высота поля
 	private int heigth; 									//ширина поля
@@ -75,7 +77,7 @@ public class Model {
 		}
 		System.out.println("\n");
 	}
-	
+	/*
 	public int[] askNeighbors(int i, int j) { 				//универсальный опрос соседей - крест и по углам
 		int SumCrossOpinions = 0;
 		SumCrossOpinions = SumCrossOpinions		 			//мнения верх-низ слева-справа
@@ -93,7 +95,19 @@ public class Model {
 
 		return new int[]{SumCrossOpinions,SumXOpinions,0};	//возвращаем в виде массива, потом можно будет выбрать вариант опроса
 	}
+	*/
 
+	public int[] getNeighborsOpinions(int i, int j) { 				//собираем мнения соседей вокруг координаты (i,j)
+	int[] neighborsOpinion = new int[9]; 					//линейный массив под мнения соседей  
+	
+	for (int k = 0; k < 3; k++) {			
+		for ( int m = 0; m < 3; m++) {
+			neighborsOpinion[k + 3 * m] = this.agentsOpinions[(this.length + i - 1 + k) % this.length]
+					[(this.heigth + j - 1 + m) % this.heigth][0];
+			}
+		}
+	return(neighborsOpinion);
+	}	
 	
 	public static void main(String[] args) {
 		Model m = new Model();								//создаем модель
@@ -121,11 +135,15 @@ public class Model {
 				
 				for (int i = 0; i < m.length; i++) { 		//обходим агентов
 					for (int j = 0; j < m.heigth; j++) {
+						//m.agentsOpinions[i][j][iteration] = neighborsOpinion[2]; //сохраняем промежуточный вариант
+						//сохраняем вычисленный промежуточный вариант мнения
+						m.agentsOpinions[i][j][iteration] = m.agentsField[i][j].formOpinion(m.getNeighborsOpinions(i, j));
 						
+						/*
 						int[] neighborsOpinion = m.askNeighbors(i, j);	//спрашиваем мнение соседей вокруг, выдаем мнение большинства
 						
 						switch (m.agentsField[i][j].NeighborsPollType) {	//формируем новое мнение в зависимости от типа опроса
-						case 0:								//cross
+						case CROSS:								//cross
 							if (neighborsOpinion[0] > 2) {	//возвращаем мнение большинства
 								neighborsOpinion[2] = 1;
 							} else if (neighborsOpinion[0] < 2) {
@@ -135,7 +153,7 @@ public class Model {
 							}
 							break;
 							
-						case 1: //wheel
+						case WHEEL: //wheel
 							int summOpinion = neighborsOpinion[0] + neighborsOpinion[1];
 							if (summOpinion > 4) {			//принимаем сторону большинства
 								neighborsOpinion[2] = 1;
@@ -146,7 +164,7 @@ public class Model {
 							}
 							break;
 							
-						case 2: //"random"
+						case RANDOM: //"random"
 							int i_random = (int) (Math.random() * (m.agentsField.length));	//случайные координаты (переделать на случайного соседа)
 							int j_random = (int) (Math.random() * (m.agentsField[0].length));	//случайные координаты
 							neighborsOpinion[2] = m.agentsField[i_random][j_random].getOpinion();
@@ -157,8 +175,8 @@ public class Model {
 							System.out.println(m.agentsField[i][j].NeighborsPollType);
 							neighborsOpinion[2] = 0;
 							break;
-						}
-						m.agentsOpinions[i][j][iteration] = neighborsOpinion[2]; //сохраняем промежуточный вариант
+						}*/
+						//m.agentsOpinions[i][j][iteration] = neighborsOpinion[2]; //сохраняем промежуточный вариант
 						}
 					}
 				for (int i = 0; i < m.length; i++) { //обходим матрицу ответов и меняем мнение агентов, потом возвращаем итог в ответы

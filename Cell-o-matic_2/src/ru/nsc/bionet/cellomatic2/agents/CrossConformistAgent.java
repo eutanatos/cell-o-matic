@@ -16,18 +16,18 @@ public class CrossConformistAgent extends Agent{
 			NeighborsPollType = PollTypes.CROSS;				//тип опроса cross, задан классом
 		}
 
-	public int formOpinion(int[] neighborsOpinion) { //формирование нового мнения по переданным мнениям соседей (3х3)
-		int crossSummOpinion = 0; //сюда сложим мнения соседей
-		for (int k : crossPoll) { //обход массива мнений по соответствующему шаблону (задается в родительском классе)
+	public int formOpinion(int[] neighborsOpinion) { 			//формирование нового мнения по переданным мнениям соседей (3х3)
+		int crossSummOpinion = 0; 								//сюда сложим мнения соседей
+		for (int k : crossPoll) { 								//обход массива мнений по соответствующему шаблону (задается в родительском классе)
 			crossSummOpinion = crossSummOpinion + neighborsOpinion[k];
 		}
 		
-		if (crossSummOpinion > 2) {	//возвращаем мнение большинства
+		if (crossSummOpinion > 2) {								//возвращаем мнение большинства
 			return(1);
-		} else if (neighborsOpinion[0] < 2) {//возвращаем мнение меньшинства
+		} else if (neighborsOpinion[0] < 2) {					//возвращаем мнение меньшинства
 			return(0);
 		} else {
-			return(neighborsOpinion[4]); //если ничья, то остаемся при своем мнении
+			return(neighborsOpinion[4]); 						//если ничья, то остаемся при своем мнении
 		}	
 	}
 	

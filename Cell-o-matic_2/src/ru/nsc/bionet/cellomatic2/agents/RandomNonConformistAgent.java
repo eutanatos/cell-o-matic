@@ -4,15 +4,15 @@ import ru.nsc.bionet.cellomatic2.agents.Agent;
 
 public class RandomNonConformistAgent extends Agent{
 	
-public RandomNonConformistAgent() { 							//Случайный Агент
+public RandomNonConformistAgent() { 											//Случайный Агент
 		super();
-		conformism = false; 									// проверка на конформизм в суждениях
+		conformism = false; 													// проверка на конформизм в суждениях
 		NeighborsPollType = PollTypes.RANDOM;
 	}
 
-public RandomNonConformistAgent(int opinion, boolean zealot) { 	//заданные параметры суперкласса
+public RandomNonConformistAgent(int opinion, boolean zealot) { 					//заданные параметры суперкласса
 		super(opinion, zealot);
-		conformism = false; 									// проверка на конформизм в суждениях
+		conformism = false; 													// проверка на конформизм в суждениях
 		NeighborsPollType = PollTypes.RANDOM;
 	}
 
